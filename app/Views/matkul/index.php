@@ -54,20 +54,21 @@
                             <td><?php echo $matkul['sks'] ?></td>
                             <td><?php echo  $matkul['semester'] ?></td>
                             <td><?php echo  $matkul['name'] ?></td>
-                            <td class="text-center">
-                                <?php
-                                if (session()->get('hak_akses') == 1) :
-                                ?>
-                                <a href="<?= url_to('Matkul::edit',  $matkul['id_matkul']); ?>" class="btn btn-warning fa fa-pencil-square-o"> Edit</a>
-                                <a href="<?= url_to('Matkul::hapus',  $matkul['id_matkul']); ?>" class=" btn btn-danger fa fa-trash-o"> Hapus</a>
-                                <?php endif; ?>
-                            </td>
+                            <?php
+                            if (session()->get('hak_akses') == 1) :
+                            ?>
+                                <td class="text-center">
+                                    <a href="<?= url_to('Matkul::edit',  $matkul['id_matkul']); ?>" class="btn btn-warning fa fa-pencil-square-o"> Edit</a>
+                                    <a href="<?= url_to('Matkul::hapus',  $matkul['id_matkul']); ?>" class=" btn btn-danger fa fa-trash-o"> Hapus</a>
+                                </td>
+                            <?php endif; ?>
                         </tr>
 
                     <?php endforeach ?>
                 </tbody>
             </table>
         </div>
+        <?= $pager->links('matkul', 'pagers') ?>
     </div>
 </div>
 <?= $this->endSection() ?>

@@ -27,9 +27,10 @@ class Matkul extends BaseController
 
     public function index()
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $dosen = $this->matkul->join('user', 'user.id_user = matkul.id_user');
         if (session()->get('hak_akses') == 2) {
             $dosen->where('matkul.id_user', session()->id_user);
@@ -45,6 +46,9 @@ class Matkul extends BaseController
 
     public function tambah()
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         
         $data = [
             'title' => 'Tambah Data Mata Kuliah',
@@ -55,6 +59,10 @@ class Matkul extends BaseController
 
     public function save()
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $data = $this->request->getPost();
         if (!$this->validateData($data, $this->rules)) {
             return redirect()->back()->with('message', $this->validator->getErrors());
@@ -66,6 +74,10 @@ class Matkul extends BaseController
 
     public function edit($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $data = [
             'title' => 'Edit Data Mata Kuliah',
             'data' => $this->matkul->join('user', 'user.id_user = matkul.id_user')
@@ -79,6 +91,10 @@ class Matkul extends BaseController
 
     public function update($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $data = $this->request->getPost();
         if (!$this->validateData($data, $this->rules)) {
             return redirect()->back()->with('message', $this->validator->getErrors());
@@ -91,6 +107,10 @@ class Matkul extends BaseController
 
     public function hapus($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $this->matkul->delete($id);
         return redirect()->route('Matkul::index')->with('message', 'Hapus Data Berhasil');
     }

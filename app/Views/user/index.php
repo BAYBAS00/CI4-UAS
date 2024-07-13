@@ -62,6 +62,7 @@
                 </tbody>
             </table>
         </div>
+        <?= $pager->links('user', 'pagers') ?>
     </div>
 </div>
 <?= $this->endSection() ?>

@@ -30,9 +30,10 @@ class Kehadiran extends BaseController
 
     public function index()
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $dosen = $this->kehadiran->join('user', 'user.id_user = kehadiran.id_user', 'left')
             ->join('matkul', 'matkul.id_matkul = kehadiran.id_matkul', 'left');
         if (session()->get('hak_akses') == 2) {
@@ -49,6 +50,10 @@ class Kehadiran extends BaseController
 
     public function tambah()
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $id_user = session()->get('id_user');
         $data = [
             'title' => 'Kehadiran',
@@ -60,6 +65,9 @@ class Kehadiran extends BaseController
 
     public function save()
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
 
         $data = $this->request->getPost();
         if (!$this->validateData($data, $this->rules)) {
@@ -74,6 +82,10 @@ class Kehadiran extends BaseController
 
     public function edit($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $data = [
             'title' => 'Edit Kehadiran',
             'data' => $this->kehadiran
@@ -90,6 +102,10 @@ class Kehadiran extends BaseController
 
     public function update($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $data = $this->request->getPost();
         if (!$this->validateData($data, $this->rules)) {
             return redirect()->back()->with('message', $this->validator->getErrors());
@@ -102,6 +118,10 @@ class Kehadiran extends BaseController
 
     public function hadir($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $kehadiran = $this->kehadiran
             ->join('user', 'user.id_user = kehadiran.id_user')
             ->join('matkul', 'matkul.id_matkul = kehadiran.id_matkul')->find($id);
@@ -126,6 +146,10 @@ class Kehadiran extends BaseController
 
     public function hapus($id)
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
+
         $this->kehadiran->delete($id);
         return redirect()->route('Kehadiran::index')->with('message', 'Hapus Data Berhasil');
     }

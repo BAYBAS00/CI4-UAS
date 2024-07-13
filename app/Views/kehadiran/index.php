@@ -51,21 +51,24 @@
                             <td><?php echo $hadir['nama_matkul'] ?></td>
                             <td><?php echo  $hadir['absensi'] ?></td>
                             <td><?php echo  $hadir['catatan'] ?></td>
-                            <td class="text-center">
-                                <?php
-                                if (session()->get('hak_akses') == 2) :
-                                ?>
+
+                            <?php
+                            if (session()->get('hak_akses') == 2) :
+                            ?>
+                                <td class="text-center">
                                     <a href="<?= url_to('Kehadiran::edit',  $hadir['id_hadir']); ?>" class="btn btn-warning fa fa-pencil-square-o"> Edit</a>
                                     <a href="<?= url_to('Kehadiran::hapus',  $hadir['id_hadir']); ?>" class=" btn btn-danger fa fa-trash-o"> Hapus</a>
                                     <a href="<?= url_to('Kehadiran::hadir',  $hadir['id_hadir']); ?>" class=" btn btn-info">Kirim</a>
-                                <?php endif; ?>
-                            </td>
+                                </td>
+                            <?php endif; ?>
+
                         </tr>
 
                     <?php endforeach ?>
                 </tbody>
             </table>
         </div>
+        <?= $pager->links('kehadiran', 'pagers') ?>
     </div>
 </div>
 <?= $this->endSection() ?>

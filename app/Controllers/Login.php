@@ -47,9 +47,6 @@ class Login extends BaseController
 
     function logout()
     {
-        if (!session()->get('username')) {
-            return redirect()->route('Login::index');
-        }
         session()->destroy();
         return redirect()->to('/login');
     }

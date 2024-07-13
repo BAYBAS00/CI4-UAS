@@ -19,6 +19,9 @@ class Profil extends BaseController
         if (!session()->get('username')) {
             return redirect()->route('Login::index');
         }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         $id = session()->get('id_user');
         $data = [
             'title' => 'Edit Data user',
@@ -30,6 +33,9 @@ class Profil extends BaseController
 
     public function update()
     {
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         if (!session()->get('username')) {
             return redirect()->route('Login::index');
         }

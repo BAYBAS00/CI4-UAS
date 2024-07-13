@@ -48,7 +48,7 @@
                             ?>
                                 <li><a class="dropdown-item" href="<?= url_to('Profil::edit') ?>">User</a></li>
                             <?php endif; ?>
-                            <li><a class="dropdown-item" href="<?= url_to('Login::index') ?>">Logout</a></li>
+                            <li><a class="dropdown-item" href="<?= url_to('Login::logout') ?>">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

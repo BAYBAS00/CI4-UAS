@@ -16,9 +16,9 @@ class User extends BaseController
 
     public function index()
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         $data = [
             'data' => $this->user->paginate('5', 'user'),
             'title' => 'Data User',
@@ -29,17 +29,17 @@ class User extends BaseController
 
     public function tambah()
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         return view('user/tambah', ['title' => 'Tambah Data User']);
     }
 
     public function save()
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         $data = [
             'username' => $this->request->getVar('username'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
@@ -72,9 +72,9 @@ class User extends BaseController
 
     public function edit($id)
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         $data = [
             'title' => 'Edit Data User',
             'user' => $this->user->find($id),
@@ -85,9 +85,9 @@ class User extends BaseController
 
     public function update($id)
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         $data = [
             'username' => $this->request->getVar('username'),
             'email' => $this->request->getVar('email'),
@@ -122,9 +122,9 @@ class User extends BaseController
 
     public function hapus($id)
     {
-        // if (!session()->get('username')) {
-        //     return redirect()->route('Login::index');
-        // }
+        if (!session()->get('username')) {
+            return redirect()->route('Login::index');
+        }
         $this->user->delete($id);
         return redirect()->route('User::index')->with('message', 'Hapus Data Berhasil');
     }
